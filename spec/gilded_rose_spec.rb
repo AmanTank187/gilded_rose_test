@@ -2,90 +2,36 @@ require 'gilded_rose'
 
 describe GildedRose do
 
-#   describe "#update_quality" do
-#     it "does not change the name" do
-#       items = [Item.new("foo", 5, 10)]
-#       GildedRose.new(items).update_quality()
-#       expect(items[0].name).to eq "foo"
-#     end
-
-#     it "Quality and Sellin of regular item is decreased by 1" do
-#       items = [Item.new("foo", 5, 10)]
-#       GildedRose.new(items).update_quality()
-#       expect(items[0].quality).to eq 9
-#       expect(items[0].sell_in).to eq 4
-#     end
-
-#     it "Regular item decreases by two after sell by date" do
-#       items = [Item.new("foo", 0, 10)]
-#       GildedRose.new(items).update_quality()
-#       expect(items[0].quality).to eq 8
-#       expect(items[0].sell_in).to eq -1
-#     end
-
-#     it "Item cannot go below 0 quality" do
-#       items = [Item.new("foo", 10, 0)]
-#       GildedRose.new(items).update_quality()
-#       expect(items[0].quality).to eq 0
-#       expect(items[0].sell_in).to eq 9
-#     end
-
-#     it "Checks Sulfuras stays the same" do
-#       items = [Item.new("Sulfuras, Hand of Ragnaros", 5, 10)]
-#       GildedRose.new(items).update_quality()
-#       expect(items[0].quality).to eq 10
-#       expect(items[0].sell_in).to eq 5
-#     end 
-
-#     it "Aged brie should increase in quality as sell_in decreasing" do
-#       items = [Item.new("Aged Brie", 5, 10)]
-#       GildedRose.new(items).update_quality()
-#       expect(items[0].quality).to eq 11
-#       expect(items[0].sell_in).to eq 4
-#     end 
-
-#     it "Item like Aged brie cannot go above the quality of 50" do
-#       items = [Item.new("Aged Brie", 5, 50)]
-#       GildedRose.new(items).update_quality()
-#       expect(items[0].quality).to eq 50
-#       expect(items[0].sell_in).to eq 4
-#     end 
-
-#     
-
-# end
-
-  describe "#update_normal" do
+  describe "#update_quality" do
     it "Quality and Sellin of regular item is decreased by 1" do
       items = [Item.new("foo", 5, 10)]
-      GildedRose.new(items).update_normal()
+      GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 9
       expect(items[0].sell_in).to eq 4
     end
 
     it "Regular item decreases by two after sell by date" do
       items = [Item.new("foo", 0, 10)]
-      GildedRose.new(items).update_normal()
+      GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 8
       expect(items[0].sell_in).to eq -1
     end
 
     it "Stops at 0 even if it should -2 from the quality" do
       items = [Item.new("foo", 0, 1)]
-      GildedRose.new(items).update_normal()
+      GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 0
       expect(items[0].sell_in).to eq -1
     end
 
     it "Item cannot go below 0 quality" do
       items = [Item.new("foo", 10, 0)]
-      GildedRose.new(items).update_normal()
+      GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 0
       expect(items[0].sell_in).to eq 9
     end
-  end
 
-  describe "#update_brie" do
+
     it "Aged brie should increase in quality as sell_in decreasing" do
       items = [Item.new("Aged Brie", 5, 10)]
       GildedRose.new(items).update_quality()
@@ -99,10 +45,8 @@ describe GildedRose do
       expect(items[0].quality).to eq 50
       expect(items[0].sell_in).to eq 4
     end 
-  end 
 
-  describe "#update_backstage" do
-  it "Backstage passes increase in value +2 if 10 days are left" do
+    it "Backstage passes increase in value +2 if 10 days are left" do
           items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 10, 10)]
           GildedRose.new(items).update_quality()
           expect(items[0].quality).to eq 12
@@ -123,6 +67,11 @@ describe GildedRose do
           expect(items[0].sell_in).to eq -2
         end 
 
-  end 
-
+        it "Checks Sulfuras stays the same" do
+                items = [Item.new("Sulfuras, Hand of Ragnaros", 5, 10)]
+                GildedRose.new(items).update_quality()
+                expect(items[0].quality).to eq 10
+                expect(items[0].sell_in).to eq 5
+        end 
+      end 
 end
