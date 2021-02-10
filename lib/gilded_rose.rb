@@ -50,7 +50,8 @@ class GildedRose
               end
             end
           else
-            item.quality = item.quality - item.quality
+            #This is where backstage pass is set to 0 if the sell_in number is less than 0. 
+            item.quality = 0
           end
         else
           if item.quality < 50
