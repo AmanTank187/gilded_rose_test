@@ -45,4 +45,17 @@ Feel free to make any changes to the UpdateQuality method and add any new code a
 * Git clone this repo
 * CD into gilded_rose_test 
 * Run bundle install
+* Go into IRB and require './lib/gilded_rose'
+* Create an items array with an item object => items = [Item.new('apple',10,10)]
+* Create a gilded_rose class that takes items array => gilded = GildedRose.new(items)
+* You can call update_quality on the class => gilded.update_quality
+* This should show you => [#<Item:0x00007fe9ae116508 @name="apple", @sell_in=9, @quality=9>] 
+
+![Screenshot 2021-02-11 at 16 43 36](https://user-images.githubusercontent.com/37899538/107668232-5ad20f00-6c88-11eb-8c5d-8a5c78bfc0e5.png)
+
+* To see the coverage of the tests and see if they all pass you can run 'RSpec' and it should show :
+
+![Screenshot 2021-02-11 at 16 48 56](https://user-images.githubusercontent.com/37899538/107668859-0a0ee600-6c89-11eb-82a1-3c79cb3ae61b.png)
+
+
 
