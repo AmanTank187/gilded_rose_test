@@ -11,14 +11,14 @@ describe GildedRose do
       expect(items[0].sell_in).to eq 4
     end
 
-    it 'Regular item decreases by two after sell by date' do
+    it 'Regular item decreases by two after sell in date is less than 0' do
       items = [Item.new('foo', 0, 10)]
       GildedRose.new(items).update_quality
       expect(items[0].quality).to eq 8
       expect(items[0].sell_in).to eq(-1)
     end
 
-    it 'Stops at 0 even if it should -2 from the quality' do
+    it 'Quality should stop at 0 even if it should decrease by -2' do
       items = [Item.new('foo', 0, 1)]
       GildedRose.new(items).update_quality
       expect(items[0].quality).to eq 0
@@ -32,7 +32,7 @@ describe GildedRose do
       expect(items[0].sell_in).to eq 9
     end
 
-    it 'Aged brie should increase in quality as sell_in decreasing' do
+    it 'Aged brie should increase in quality as sell_in decreases' do
       items = [Item.new('Aged Brie', 5, 10)]
       GildedRose.new(items).update_quality
       expect(items[0].quality).to eq 11
