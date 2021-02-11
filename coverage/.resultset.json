@@ -94,6 +94,8 @@
           null,
           null,
           1,
+          null,
+          1,
           1,
           1,
           null,
@@ -154,6 +156,11 @@
           null,
           null,
           null,
+          null
+        ]
+      },
+      "/Users/amantank/Desktop/ruby projects/Course/Tech tests/gilded_rose_test/lib/item.rb": {
+        "lines": [
           1,
           1,
           null,
@@ -170,6 +177,6 @@
         ]
       }
     },
-    "timestamp": 1612973582
+    "timestamp": 1613052571
   }
 }
