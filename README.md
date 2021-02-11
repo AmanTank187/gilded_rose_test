@@ -39,3 +39,10 @@ Feel free to make any changes to the UpdateQuality method and add any new code a
 * The last refactor I completed was to update the test descriptions so if anyone else decided to read through my code they would have an easy time following along. 
 
 ---------------------
+
+## How to run the project:
+
+* Git clone this repo
+* CD into gilded_rose_test 
+* Run bundle install
+
