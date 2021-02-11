@@ -80,5 +80,33 @@ describe GildedRose do
       expect(items[0].quality).to eq 80
       expect(items[0].sell_in).to eq 0
     end
+
+    it 'Quality and Sellin of conjured item is decreased by 2' do
+      items = [Item.new('Conjured item', 5, 10)]
+      GildedRose.new(items).update_quality
+      expect(items[0].quality).to eq 8
+      expect(items[0].sell_in).to eq 4
+    end
+
+    it 'conjured item decreases by four after sell by date' do
+      items = [Item.new('Conjured item', 0, 10)]
+      GildedRose.new(items).update_quality
+      expect(items[0].quality).to eq 6
+      expect(items[0].sell_in).to eq(-1)
+    end
+
+    it 'conjured item stops at 0 even if it should -4 from the quality' do
+      items = [Item.new('Conjured item', 0, 3)]
+      GildedRose.new(items).update_quality
+      expect(items[0].quality).to eq 0
+      expect(items[0].sell_in).to eq(-1)
+    end
+
+    it 'conjured item cannot go below 0 quality' do
+      items = [Item.new('conjured item', 10, 0)]
+      GildedRose.new(items).update_quality
+      expect(items[0].quality).to eq 0
+      expect(items[0].sell_in).to eq 9
+    end
   end
 end

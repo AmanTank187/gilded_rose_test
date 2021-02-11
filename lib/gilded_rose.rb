@@ -21,6 +21,8 @@ class GildedRose
       when 'Sulfuras, Hand of Ragnaros'
         item.quality = 80
         item.sell_in = 0
+      when 'Conjured item'
+        update_conjured(item)
       else
         update_normal(item)
       end
@@ -32,6 +34,12 @@ class GildedRose
   def update_normal(item)
     item.sell_in -= 1
     item.quality -= item.sell_in < MIN_QUALITY ? 2 : 1
+    quality_restriction(item)
+  end
+
+  def update_conjured(item)
+    item.sell_in -= 1
+    item.quality -= item.sell_in < MIN_QUALITY ? 4 : 2
     quality_restriction(item)
   end
 
