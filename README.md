@@ -15,8 +15,8 @@ The Quality of an item is never more than 50
 We have recently signed a supplier of conjured items. This requires an update to our system:
 
 “Conjured” items degrade in Quality twice as fast as normal items
+Feel free to make any changes to the UpdateQuality method and add any new code as long as everything still works correctly. However, do not alter the Item class or Items property as those belong to the goblin in the corner who will insta-rage and one-shot you as he doesn’t believe in shared code ownership (you can make the UpdateQuality method and Items property static if you like, we’ll cover for you)."
 
-Feel free to make any changes to the UpdateQuality method and add any new code as long as everything still works correctly. However, do not alter the Item class or Items property as those belong to the goblin in the corner who will insta-rage and one-shot you as he doesn’t believe in shared code ownership (you can make the UpdateQuality method and Items property static if you like, we’ll cover for you)."*
 ---------------------
 ## My Approach 
 
@@ -32,6 +32,10 @@ Feel free to make any changes to the UpdateQuality method and add any new code a
 
 * My testing score was around 95% but I wanted to increase it so I started to implement more tests for edge cases, I came across a problem with min and max values where if the quality was increased by +2 or 3 but the current quality was 48/49 it would go over 50. This could be prevented with the nested if statement that was provided in the original code but I did not want to use this as it was not readable. I decided to create a function that would check if the quality value went over 50 and then set it back to 50. This allowed me to remove the nested IF statement and create more readable code. 
 
-* I decided to refactor again and realised two classes were contained in one file so I decided to split the Gilded_rose and item class into their own file whilst splitting their tests into their own RSpec files. The last refactor I completed was to update the test descriptions so if anyone else decided to read through my code they would have an easy time following along. 
+* I decided to refactor again and realised two classes were contained in one file so I decided to split the Gilded_rose and item class into their own file whilst splitting their tests into their own RSpec files. 
+
+* The last bit of functionality of code i implemented was allowing to change the attributes of a conjured item, i found this really easy as all i had to do was copy the layout for a normal item and change the statement from returning 2 : 1 to 4 : 2. This then passed my tests i wrote for the conjured items previously. 
+
+* The last refactor I completed was to update the test descriptions so if anyone else decided to read through my code they would have an easy time following along. 
 
 ---------------------
