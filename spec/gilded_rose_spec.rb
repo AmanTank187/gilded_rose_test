@@ -126,5 +126,26 @@ describe GildedRose do
       expect(items[0].quality).to eq 0
       expect(items[0].sell_in).to eq 9
     end
+
+    it 'Updating a list of multiple items' do
+      items = [Item.new('apple', 5, 10),Item.new('Conjured item', 5, 20),
+      Item.new('Sulfuras, Hand of Ragnaros', 5, 20)]
+      GildedRose.new(items).update_quality
+      expect(items[0].quality).to eq 9
+      expect(items[0].sell_in).to eq 4
+      expect(items[1].quality).to eq 18
+      expect(items[1].sell_in).to eq 4
+      expect(items[2].quality).to eq 80
+      expect(items[2].sell_in).to eq 0
+    end
+
+    it 'Updating a Aged brie and backstage at the same time' do
+      items = [Item.new('Aged Brie', 5, 48),Item.new('Backstage passes to a TAFKAL80ETC concert', -1, 20)]
+      GildedRose.new(items).update_quality
+      expect(items[0].quality).to eq 49
+      expect(items[0].sell_in).to eq 4
+      expect(items[1].quality).to eq 0
+      expect(items[1].sell_in).to eq -2
+    end
   end
 end
