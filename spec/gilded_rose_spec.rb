@@ -12,10 +12,10 @@ describe GildedRose do
     end
 
     it 'Regular item decreases by two after sell in date is less than 0' do
-      items = [Item.new('foo', 0, 10)]
+      items = [Item.new('foo', -1, 10)]
       GildedRose.new(items).update_quality
       expect(items[0].quality).to eq 8
-      expect(items[0].sell_in).to eq(-1)
+      expect(items[0].sell_in).to eq(-2)
     end
 
     it 'Quality should stop at 0 even if it should decrease by -2' do
@@ -53,11 +53,29 @@ describe GildedRose do
       expect(items[0].sell_in).to eq 9
     end
 
+    it 'Backstage passes increase in value +2 if 9 - 6 days are left' do
+      items = [Item.new('Backstage passes to a TAFKAL80ETC concert', 6, 6),Item.new('Backstage passes to a TAFKAL80ETC concert', 9, 8)]
+      GildedRose.new(items).update_quality
+      expect(items[0].quality).to eq 8
+      expect(items[0].sell_in).to eq 5
+      expect(items[1].quality).to eq 10
+      expect(items[1].sell_in).to eq 8
+    end
+
     it 'Backstage passes increase in value +3 if 5 days are left' do
       items = [Item.new('Backstage passes to a TAFKAL80ETC concert', 5, 10)]
       GildedRose.new(items).update_quality
       expect(items[0].quality).to eq 13
       expect(items[0].sell_in).to eq 4
+    end
+
+    it 'Backstage passes increase in value +3 if 4-1 days are left' do
+      items = [Item.new('Backstage passes to a TAFKAL80ETC concert', 4, 10),Item.new('Backstage passes to a TAFKAL80ETC concert', 1, 13)]
+      GildedRose.new(items).update_quality
+      expect(items[0].quality).to eq 13
+      expect(items[0].sell_in).to eq 3
+      expect(items[1].quality).to eq 16
+      expect(items[1].sell_in).to eq 0
     end
 
     it 'Backstage passes increase in value +3 but does not go above 50' do
@@ -89,17 +107,17 @@ describe GildedRose do
     end
 
     it 'conjured item decreases by four after sell by date' do
-      items = [Item.new('Conjured item', 0, 10)]
+      items = [Item.new('Conjured item', -1, 10)]
       GildedRose.new(items).update_quality
       expect(items[0].quality).to eq 6
-      expect(items[0].sell_in).to eq(-1)
+      expect(items[0].sell_in).to eq(-2)
     end
 
     it 'conjured item stops at 0 even if it should -4 from the quality' do
-      items = [Item.new('Conjured item', 0, 3)]
+      items = [Item.new('Conjured item', -1, 3)]
       GildedRose.new(items).update_quality
       expect(items[0].quality).to eq 0
-      expect(items[0].sell_in).to eq(-1)
+      expect(items[0].sell_in).to eq(-2)
     end
 
     it 'conjured item cannot go below 0 quality' do

@@ -6,6 +6,8 @@ class GildedRose
   
   MIN_QUALITY = 0
   MAX_QUALITY = 50
+  BY_ONE = 1
+  BY_TWO = 2
 
   def initialize(items)
     @items = items
@@ -32,44 +34,36 @@ class GildedRose
   private
 
   def update_normal(item)
-    item.sell_in -= 1
-    item.quality -= item.sell_in < MIN_QUALITY ? 2 : 1
-    quality_restriction(item)
+    item.quality -= item.sell_in < MIN_QUALITY ? BY_TWO : BY_ONE
+    item.quality = item.quality.clamp(MIN_QUALITY, MAX_QUALITY)
+    item.sell_in -= BY_ONE 
   end
 
   def update_conjured(item)
-    item.sell_in -= 1
-    item.quality -= item.sell_in < MIN_QUALITY ? 4 : 2
-    quality_restriction(item)
+    item.quality -= item.sell_in < MIN_QUALITY ? 4 : BY_TWO
+    item.quality = item.quality.clamp(MIN_QUALITY, MAX_QUALITY)
+    item.sell_in -= BY_ONE 
   end
 
   def update_brie(item)
-    item.sell_in -= 1
-    item.quality += 1
-    quality_restriction(item)
+    item.quality += BY_ONE
+    item.quality = item.quality.clamp(MIN_QUALITY, MAX_QUALITY)
+    item.sell_in -= BY_ONE 
   end
 
   def update_backstage(item)
-    item.sell_in -= 1
-    item.quality += if item.sell_in < 6
-                      3
-                    elsif item.sell_in < 11
-                      2
-                    else
-                      1
-                    end
-
-    item.quality = MIN_QUALITY if item.sell_in < MIN_QUALITY
-    quality_restriction(item)
-  end
-
-  def quality_restriction(item)
-    if item.quality < MIN_QUALITY
-      item.quality = MIN_QUALITY
-    elsif item.quality > MAX_QUALITY
-      item.quality = MAX_QUALITY
+    if item.sell_in < 6
+      item.quality += 3
+    elsif item.sell_in < 11
+      item.quality += BY_TWO
+    else
+      item.quality += BY_ONE
     end
+    item.quality = MIN_QUALITY if item.sell_in < MIN_QUALITY
+    item.quality = item.quality.clamp(MIN_QUALITY, MAX_QUALITY)
+    item.sell_in -= BY_ONE 
   end
+
 end
 
 
